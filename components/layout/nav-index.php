@@ -42,7 +42,7 @@
                         <img
                             class="mr-3 rounded"
                             width="30"
-                            src="../../assets/img/products/product-3-50.png"
+                            src="./../assets/img/products/product-3-50.png"
                             alt="product" />
                         oPhone S9 Limited Edition
                     </a>
@@ -52,7 +52,7 @@
                         <img
                             class="mr-3 rounded"
                             width="30"
-                            src="../../assets/img/products/product-2-50.png"
+                            src="./../assets/img/products/product-2-50.png"
                             alt="product" />
                         Drone X2 New Gen-7
                     </a>
@@ -62,7 +62,7 @@
                         <img
                             class="mr-3 rounded"
                             width="30"
-                            src="../../assets/img/products/product-1-50.png"
+                            src="./../assets/img/products/product-1-50.png"
                             alt="product" />
                         Headphone Blitz
                     </a>
@@ -105,7 +105,7 @@
                         <div class="dropdown-item-avatar">
                             <img
                                 alt="image"
-                                src="../../assets/img/avatar/avatar-1.png"
+                                src="./../assets/img/avatar/avatar-1.png"
                                 class="rounded-circle" />
                             <div class="is-online"></div>
                         </div>
@@ -119,7 +119,7 @@
                         <div class="dropdown-item-avatar">
                             <img
                                 alt="image"
-                                src="../../assets/img/avatar/avatar-2.png"
+                                src="./../assets/img/avatar/avatar-2.png"
                                 class="rounded-circle" />
                         </div>
                         <div class="dropdown-item-desc">
@@ -134,7 +134,7 @@
                         <div class="dropdown-item-avatar">
                             <img
                                 alt="image"
-                                src="../../assets/img/avatar/avatar-3.png"
+                                src="./../assets/img/avatar/avatar-3.png"
                                 class="rounded-circle" />
                             <div class="is-online"></div>
                         </div>
@@ -151,7 +151,7 @@
                         <div class="dropdown-item-avatar">
                             <img
                                 alt="image"
-                                src="../../assets/img/avatar/avatar-4.png"
+                                src="./../assets/img/avatar/avatar-4.png"
                                 class="rounded-circle" />
                         </div>
                         <div class="dropdown-item-desc">
@@ -167,7 +167,7 @@
                         <div class="dropdown-item-avatar">
                             <img
                                 alt="image"
-                                src="../../assets/img/avatar/avatar-5.png"
+                                src="./../assets/img/avatar/avatar-5.png"
                                 class="rounded-circle" />
                         </div>
                         <div class="dropdown-item-desc">
@@ -257,7 +257,7 @@
                 class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                 <img
                     alt="image"
-                    src="../../assets/img/avatar/avatar-1.png"
+                    src="./../assets/img/avatar/avatar-1.png"
                     class="rounded-circle mr-1" />
                 <div class="d-sm-none d-lg-inline-block">
                     Hi, Ujang Maman
