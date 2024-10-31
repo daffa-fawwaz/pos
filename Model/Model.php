@@ -14,7 +14,7 @@ abstract class Model extends Koneksi implements ModelInterface
         $query = "INSERT INTO $table ($key) VALUES ('$value')";
         $result = mysqli_query($this->db, $query);
 
-        if($result) {
+        if ($result) {
             return $datas;
         } else {
             return false;
@@ -69,9 +69,25 @@ abstract class Model extends Koneksi implements ModelInterface
         return $result;
     }
 
-    public function delete_data($id, $table) {
+    public function delete_data($id, $table)
+    {
         $query = "DELETE FROM $table WHERE id = $id";
         $result = mysqli_query($this->db, $query);
         return $result;
+    }
+
+    public function search_data($keyword, $table)
+    {
+        $query = "SELECT * FROM $table $keyword";
+        $result = mysqli_query($this->db, $query);
+
+        return $this->converData($result);
+    }
+
+    public function paginate_data($start, $limit, $table) {
+        $query = "SELECT * FROM $table LIMIT $start, $limit";
+        $result = mysqli_query($this->db, $query);
+
+        return $this->converData($result);
     }
 }

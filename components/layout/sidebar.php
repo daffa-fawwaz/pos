@@ -54,6 +54,9 @@
                     <li>
                         <a href="index-akun.php">Informasi Akun</a>
                     </li>
+                    <li>
+                        <a href="create-pas.php">Ganti Password</a>
+                    </li>
                 </ul>
             </li>
         </ul>

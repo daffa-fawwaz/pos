@@ -66,10 +66,6 @@
                     </div>
 
                     <div class="section-body">
-                        <h2 class="section-title">Hi, Ujang!</h2>
-                        <p class="section-lead">
-                            Change information about yourself on this page.
-                        </p>
                         <div class="row">
 
 
@@ -85,60 +81,35 @@
                                     <!-- Kolom untuk form -->
                                     <div class="col-12 col-md-6 col-lg-6">
                                         <div class="card">
-                                            <div class="card profile-widget">
-                                                <div class="profile-widget-header">
-                                                    <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle profile-widget-picture">
-                                                    <div class="profile-widget-items">
-                                                        <div class="profile-widget-item">
-                                                            <div class="profile-widget-item-label">Posts</div>
-                                                            <div class="profile-widget-item-value">187</div>
-                                                        </div>
-                                                        <div class="profile-widget-item">
-                                                            <div class="profile-widget-item-label">Followers</div>
-                                                            <div class="profile-widget-item-value">6,8K</div>
-                                                        </div>
-                                                        <div class="profile-widget-item">
-                                                            <div class="profile-widget-item-label">Following</div>
-                                                            <div class="profile-widget-item-value">2,1K</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <form method="post" class="needs-validation" novalidate="">
                                                 <div class="card-header">
-                                                    <h4>Edit Akun</h4>
+                                                    <h4>Ganti Password</h4>
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="form-group col-12">
-                                                            <label>Name</label>
-                                                            <input type="text" class="form-control" value="Ujang" required="">
+                                                            <label>Password Lama</label>
+                                                            <input type="text" class="form-control" required="">
+                                                            <div class="invalid-feedback">
+                                                                Please fill in the username.
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-12">
+                                                            <label>Password Baru</label>
+                                                            <input type="text" class="form-control" required="">
+                                                            <div class="invalid-feedback">
+                                                                Please fill in the username.
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-12">
+                                                            <label>Konfirmasi Password Baru</label>
+                                                            <input type="text" class="form-control" required="">
                                                             <div class="invalid-feedback">
                                                                 Please fill in the username.
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label class="form-control-label">Avatar</label>
-                                                        <div>
-                                                            <div class="custom-file">
-                                                                <input type="file" name="site_favicon" class="custom-file-input" id="site-favicon">
-                                                                <label class="custom-file-label">Choose File</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="form-group col-12">
-                                                            <label>Email</label>
-                                                            <input type="email" class="form-control" required="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="form-group col-12">
-                                                            <label>Password</label>
-                                                            <input type="password" class="form-control" required="">
-                                                        </div>
-                                                    </div>
+
                                                 </div>
                                                 <div class="card-footer text-right">
                                                     <button class="btn btn-primary">Save Changes</button>

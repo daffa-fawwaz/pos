@@ -1,3 +1,19 @@
+<?php
+
+require_once __DIR__ . '/../Model/Model.php';
+require_once __DIR__ . '/../Model/Category.php';
+
+$categories = new Category();
+$limit = 2;
+$halamanAktif = (isset($_GET["page"]) ? $_GET["page"] : 1);
+$startData = ($limit * $halamanAktif) - $limit;
+$lenght = count($categories->all());
+$countPage = ceil($lenght / $limit);
+
+$categories = $categories->paginate($startData, $limit);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,7 +90,7 @@
                                         <div class="card-header-form">
                                             <form>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Search">
+                                                    <input id="keyword" type="text" class="form-control" placeholder="Search">
                                                     <div class="input-group-btn">
                                                         <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                                     </div>
@@ -82,8 +98,9 @@
                                             </form>
                                         </div>
                                     </div>
+
                                     <div class="card-body p-0">
-                                        <div class="table-responsive">
+                                        <div id="container" class="table-responsive">
                                             <table class="table table-striped">
                                                 <tr>
                                                     <th>
@@ -95,23 +112,58 @@
                                                     <th>Nama Kategori</th>
                                                     <th>Action</th>
                                                 </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="custom-checkbox custom-control">
-                                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-1">
-                                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Menu Category</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-primary">Detail</a>
-                                                        <a href="#" class="btn btn-success">Edit</a>
-                                                        <a href="#" class="btn btn-danger">Hapus</a>
-                                                    </td>
-                                                </tr>
+                                                <?php $no = 1 ?>
+                                                <?php foreach ($categories as $categori): ?>
+
+                                                    <tr>
+                                                        <td>
+                                                            <div class="custom-checkbox custom-control">
+                                                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-<?= $no ?>">
+                                                                <label for=" checkbox-<?= $no++ ?>" class="custom-control-label">&nbsp;</label>
+                                                            </div>
+                                                        </td>
+                                                        <td><?= $categori['name'] ?></td>
+                                                        <td>
+                                                            <a href="<?= $categori['id'] ?>" class="btn btn-primary">Detail</a>
+                                                            <a href="<?= $categori['id'] ?>" class="btn btn-success">Edit</a>
+                                                            <a href="<?= $categori['id'] ?>" class="btn btn-danger">Hapus</a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach ?>
                                             </table>
+
+
+
+                                            <div class="card-body">
+                                                <nav aria-label="...">
+                                                    <ul class="pagination">
+
+                                                        <?php if ($halamanAktif > 1): ?>
+                                                            <a class="page-link" href="?page=<?= $halamanAktif - 1 ?>" tabindex="-1">Previous</a>
+                                                        <?php else: ?>
+                                                            <a class="page-link" href="" tabindex="-1">Previous</a>
+                                                        <?php endif; ?>
+
+                                                        <?php for ($i = 1; $i <= $countPage; $i++) : ?>
+                                                            <?php if ($i == $halamanAktif): ?>
+                                                                <button class="btn btn-primary"><a href="?page=<?= $i ?>" class="text-light"><?= $i ?></a></button>
+                                                            <?php else: ?>
+                                                                <button class="btn"><a href="?page=<?= $i ?>" class="text-primary"><?= $i ?></a></button>
+                                                            <?php endif; ?>
+                                                        <?php endfor; ?>
+
+                                                        <?php if ($halamanAktif < $countPage): ?>
+                                                            <a class="page-link" href="?page=<?= $halamanAktif + 1 ?>">Next</a>
+                                                        <?php else: ?>
+                                                            <a class="page-link" href="">Next</a>
+                                                        <?php endif; ?>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -126,6 +178,9 @@
             <?php include('../components/layout/footer.php') ?>
         </div>
     </div>
+
+    <script src="../js/jquery.js"></script>
+    <script src=" ../js/script.js"></script>
 
     <!-- General JS Scripts -->
     <script src="../assets/modules/jquery.min.js"></script>
