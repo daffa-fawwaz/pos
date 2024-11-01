@@ -5,7 +5,19 @@ require_once __DIR__ . '/../Model/Model.php';
 
 $keyword = $_GET["cari"];
 $categories = new Category();
-$categories = $categories->search($keyword);
+$kategoris = "";
+$limit = 2;
+$halamanAktif = (isset($_GET["page"]) ? $_GET["page"] : 1);
+$startData = ($limit * $halamanAktif) - $limit;
+$lenght = isset($keyword) && $keyword != "" ? count($categories->search($keyword)) : count($categories->all());
+$countPage = ceil($lenght / $limit);
+
+if (isset($keyword)) {
+    $kategoris = $categories->search($keyword, $startData, $limit);
+} else {
+    $kategoris = $categories->paginate($startData, $limit);
+}
+
 ?>
 
 <div id="container" class="table-responsive">
@@ -20,13 +32,14 @@ $categories = $categories->search($keyword);
             <th>Nama Kategori</th>
             <th>Action</th>
         </tr>
-        <?php foreach ($categories as $categori): ?>
+        <?php $no = 1 ?>
+        <?php foreach ($kategoris as $categori): ?>
 
             <tr>
                 <td>
                     <div class="custom-checkbox custom-control">
-                        <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox">
-                        <label for=" checkbox" class="custom-control-label">&nbsp;</label>
+                        <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-<?= $no ?>">
+                        <label for=" checkbox-<?= $no++ ?>" class="custom-control-label">&nbsp;</label>
                     </div>
                 </td>
                 <td><?= $categori['name'] ?></td>
@@ -38,4 +51,34 @@ $categories = $categories->search($keyword);
             </tr>
         <?php endforeach ?>
     </table>
+
+
+
+    <div class="card-body">
+        <nav aria-label="...">
+            <ul class="pagination">
+
+                <?php if ($halamanAktif > 1): ?>
+                    <a class="page-link" href="?page=<?= $halamanAktif - 1 ?>" tabindex="-1">Previous</a>
+                <?php else: ?>
+                    <a class="page-link" href="" tabindex="-1">Previous</a>
+                <?php endif; ?>
+
+                <?php for ($i = 1; $i <= $countPage; $i++) : ?>
+                    <?php if ($i == $halamanAktif): ?>
+                        <button class="btn btn-primary"><a href="?page=<?= $i ?>" class="text-light"><?= $i ?></a></button>
+                    <?php else: ?>
+                        <button class="btn"><a href="?page=<?= $i ?>" class="text-primary"><?= $i ?></a></button>
+                    <?php endif; ?>
+                <?php endfor; ?>
+
+                <?php if ($halamanAktif < $countPage): ?>
+                    <a class="page-link" href="?page=<?= $halamanAktif + 1 ?>">Next</a>
+                <?php else: ?>
+                    <a class="page-link" href="">Next</a>
+                <?php endif; ?>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </div>

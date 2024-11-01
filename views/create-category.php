@@ -1,3 +1,35 @@
+<?php
+
+require_once __DIR__ . '/../Model/Model.php';
+require_once __DIR__ . '/../Model/Category.php';
+
+
+if (isset($_POST["submit"])) {
+
+    $category = [
+        "name" => $_POST["name"]
+    ];
+    if (strlen($_POST["name"]) > 225) {
+        echo '<script>alert("Kategori harus dibawah 225 karakter");
+        window.location.href = "create-category.php";</script>';
+        die;
+    }
+    $categories = new Category();
+    $result = $categories->create($category);
+    
+    if ($result !== false) {
+        echo "<script>alert(`Data berhasil ditambahkan dengan nama {$result['name']}`);
+        window.location.href = 'create-category.php';
+        </script>";
+    }
+}
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,15 +110,15 @@
                                     <div class="card-body">
                                         <h4>Input Kategori</h4>
                                     </div>
-                                    <div class="card-body">
+                                    <form method="post" action="" class="card-body">
                                         <div class="form-group">
                                             <label>Nama Kategori</label>
-                                            <input type="text" class="form-control ">
+                                            <input type="text" name="name" class="form-control ">
                                         </div>
                                         <div class="d-flex justify-content-end">
-                                            <button class="btn btn-primary ">Tambahkan</button>
+                                            <button name="submit" type="submit" class="btn btn-primary ">Tambahkan</button>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

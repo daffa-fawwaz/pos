@@ -4,6 +4,7 @@ require_once __DIR__ . '/../Model/Model.php';
 require_once __DIR__ . '/../Model/Category.php';
 
 $categories = new Category();
+
 $limit = 2;
 $halamanAktif = (isset($_GET["page"]) ? $_GET["page"] : 1);
 $startData = ($limit * $halamanAktif) - $limit;

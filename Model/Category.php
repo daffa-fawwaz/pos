@@ -30,9 +30,13 @@ class Category extends Model
     {
         return parent::delete_data($id, $this->table);
     }
-    public function search($keyword)
+    public function search($keyword, $start = null, $limit = null)
     {
-        $keyword = " WHERE name LIKE '%{$keyword}%'";
+        $queryLimit = "";
+        if(isset($start) && isset($limit)) {
+            $queryLimit = " LIMIT $start, $limit";
+        }
+        $keyword = " WHERE name LIKE '%{$keyword}%' $queryLimit";
         return parent::search_data($keyword, $this->table);
     }
 
