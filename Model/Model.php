@@ -30,6 +30,9 @@ abstract class Model extends Koneksi implements ModelInterface
         return $this->converData($result);
     }
 
+    // public function join_data($table, $table_join) {
+    //     $query = "SELECT * FROM $table JOIN $table_join ON";
+    // }
     public function converData($datas)
     {
         $data = [];

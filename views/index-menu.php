@@ -1,3 +1,20 @@
+<?php
+
+require_once __DIR__ . '/../Model/Model.php';
+require_once __DIR__ . '/../Model/Item.php';
+
+$menus = new Item();
+
+$limit = 2;
+$halamanAktif = (isset($_GET["page"]) ? $_GET["page"] : 1);
+$startData = ($limit * $halamanAktif) - $limit;
+$lenght = count($menus->all());
+$countPage = ceil($lenght / $limit);
+
+$menus = $menus->paginate($startData, $limit);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,7 +91,7 @@
                                         <div class="card-header-form">
                                             <form>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" placeholder="Search">
+                                                    <input id="keyword_menu" type="text" class="form-control" placeholder="Search">
                                                     <div class="input-group-btn">
                                                         <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                                     </div>
@@ -82,8 +99,9 @@
                                             </form>
                                         </div>
                                     </div>
+
                                     <div class="card-body p-0">
-                                        <div class="table-responsive">
+                                        <div id="container_menu" class="table-responsive">
                                             <table class="table table-striped">
                                                 <tr>
                                                     <th>
@@ -92,110 +110,65 @@
                                                             <label for="checkbox-all" class="custom-control-label">&nbsp;</label>
                                                         </div>
                                                     </th>
-                                                    <th>Task Name</th>
-                                                    <th>Progress</th>
-                                                    <th>Members</th>
-                                                    <th>Due Date</th>
-                                                    <th>Status</th>
+                                                    <th>Nama Kategori</th>
+                                                    <th>Gambar</th>
+                                                    <th>Harga</th>
                                                     <th>Action</th>
                                                 </tr>
-                                                <tr>
-                                                    <td class="p-0 text-center">
-                                                        <div class="custom-checkbox custom-control">
-                                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-1">
-                                                            <label for="checkbox-1" class="custom-control-label">&nbsp;</label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Create a mobile app</td>
-                                                    <td class="align-middle">
-                                                        <div class="progress" data-height="4" data-toggle="tooltip" title="100%">
-                                                            <div class="progress-bar bg-success" data-width="100"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <img alt="image" src="../assets/img/avatar/avatar-5.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Wildan Ahdian">
-                                                    </td>
-                                                    <td>2018-01-20</td>
-                                                    <td>
-                                                        <div class="badge badge-success">Completed</div>
-                                                    </td>
-                                                    <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="p-0 text-center">
-                                                        <div class="custom-checkbox custom-control">
-                                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-2">
-                                                            <label for="checkbox-2" class="custom-control-label">&nbsp;</label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Redesign homepage</td>
-                                                    <td class="align-middle">
-                                                        <div class="progress" data-height="4" data-toggle="tooltip" title="0%">
-                                                            <div class="progress-bar" data-width="0"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Nur Alpiana">
-                                                        <img alt="image" src="../assets/img/avatar/avatar-3.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Hariono Yusup">
-                                                        <img alt="image" src="../assets/img/avatar/avatar-4.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Bagus Dwi Cahya">
-                                                    </td>
-                                                    <td>2018-04-10</td>
-                                                    <td>
-                                                        <div class="badge badge-info">Todo</div>
-                                                    </td>
-                                                    <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="p-0 text-center">
-                                                        <div class="custom-checkbox custom-control">
-                                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-3">
-                                                            <label for="checkbox-3" class="custom-control-label">&nbsp;</label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Backup database</td>
-                                                    <td class="align-middle">
-                                                        <div class="progress" data-height="4" data-toggle="tooltip" title="70%">
-                                                            <div class="progress-bar bg-warning" data-width="70"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Rizal Fakhri">
-                                                        <img alt="image" src="../assets/img/avatar/avatar-2.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Hasan Basri">
-                                                    </td>
-                                                    <td>2018-01-29</td>
-                                                    <td>
-                                                        <div class="badge badge-warning">In Progress</div>
-                                                    </td>
-                                                    <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="p-0 text-center">
-                                                        <div class="custom-checkbox custom-control">
-                                                            <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-4">
-                                                            <label for="checkbox-4" class="custom-control-label">&nbsp;</label>
-                                                        </div>
-                                                    </td>
-                                                    <td>Input data</td>
-                                                    <td class="align-middle">
-                                                        <div class="progress" data-height="4" data-toggle="tooltip" title="100%">
-                                                            <div class="progress-bar bg-success" data-width="100"></div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <img alt="image" src="../assets/img/avatar/avatar-2.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Rizal Fakhri">
-                                                        <img alt="image" src="../assets/img/avatar/avatar-5.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Isnap Kiswandi">
-                                                        <img alt="image" src="../assets/img/avatar/avatar-4.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Yudi Nawawi">
-                                                        <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle" width="35" data-toggle="tooltip" title="Khaerul Anwar">
-                                                    </td>
-                                                    <td>2018-01-16</td>
-                                                    <td>
-                                                        <div class="badge badge-success">Completed</div>
-                                                    </td>
-                                                    <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                                                </tr>
+                                                <?php $no = 1 ?>
+                                                <?php foreach ($menus as $menu): ?>
+
+                                                    <tr>
+                                                        <td>
+                                                            <div class="custom-checkbox custom-control">
+                                                                <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-<?= $no ?>">
+                                                                <label for=" checkbox-<?= $no++ ?>" class="custom-control-label">&nbsp;</label>
+                                                            </div>
+                                                        </td>
+                                                        <td><?= $menu['name'] ?></td>
+                                                        <td><img width="100" src="../public/img/items/<?= $menu["attachment"] ?>" alt=""></td>
+                                                        <td><?= $menu['price'] ?></td>
+                                                        <td>
+                                                            <a href="<?= $menu['id'] ?>" class="btn btn-primary">Detail</a>
+                                                            <a href="<?= $menu['id'] ?>" class="btn btn-success">Edit</a>
+                                                            <a href="<?= $menu['id'] ?>" class="btn btn-danger">Hapus</a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach ?>
                                             </table>
+
+
+
+                                            <div class="card-body">
+                                                <nav aria-label="...">
+                                                    <ul class="pagination">
+
+                                                        <?php if ($halamanAktif > 1): ?>
+                                                            <a class="page-link" href="?page=<?= $halamanAktif - 1 ?>" tabindex="-1">Previous</a>
+                                                        <?php else: ?>
+                                                            <a class="page-link" href="" tabindex="-1">Previous</a>
+                                                        <?php endif; ?>
+
+                                                        <?php for ($i = 1; $i <= $countPage; $i++) : ?>
+                                                            <?php if ($i == $halamanAktif): ?>
+                                                                <button class="btn btn-primary"><a href="?page=<?= $i ?>" class="text-light"><?= $i ?></a></button>
+                                                            <?php else: ?>
+                                                                <button class="btn"><a href="?page=<?= $i ?>" class="text-primary"><?= $i ?></a></button>
+                                                            <?php endif; ?>
+                                                        <?php endfor; ?>
+
+                                                        <?php if ($halamanAktif < $countPage): ?>
+                                                            <a class="page-link" href="?page=<?= $halamanAktif + 1 ?>">Next</a>
+                                                        <?php else: ?>
+                                                            <a class="page-link" href="">Next</a>
+                                                        <?php endif; ?>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -210,6 +183,9 @@
             <?php include('../components/layout/footer.php') ?>
         </div>
     </div>
+
+    <script src="../js/jquery.js"></script>
+    <script src=" ../js/script.js"></script>
 
     <!-- General JS Scripts -->
     <script src="../assets/modules/jquery.min.js"></script>
@@ -233,6 +209,13 @@
     <!-- Template JS File -->
     <script src="../assets/js/scripts.js"></script>
     <script src="../assets/js/custom.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#keyword_menu").on("keyup", function() {
+                $("#container_menu").load("./../search/Menu.php?cari=" + $("#keyword_menu").val());
+            })
+        })
+    </script>
 </body>
 
 </html>

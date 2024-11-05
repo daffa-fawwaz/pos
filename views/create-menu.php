@@ -1,3 +1,37 @@
+<?php
+
+require_once __DIR__ . '/../Model/Model.php';
+require_once __DIR__ . '/../Model/Category.php';
+require_once __DIR__ . '/../Model/Item.php';
+
+$categories = new Category();
+$categories = $categories->all();
+
+$menu = new Item();
+
+if (isset($_POST["submit"])) {
+
+    $datas = [
+        "post" => $_POST,
+        "files" => $_FILES,
+    ];
+
+    $result = $menu->create($datas);
+
+    if (gettype($result) == "string") {
+        echo "<script>alert('{$result}');
+        window.location.href = 'create-menu.php';</script>";
+    } else {
+        echo "<script>alert('Menu berhasil ditambahkan');
+        window.location.href = 'create-menu.php';</script>";
+    }
+}
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,7 +106,7 @@
                         <div class="row">
                             <div class="col-12 col-md-6 col-lg-6 d-flex align-items-center">
                                 <div>
-                                    <img src="../Fastfood.png" alt="" width="400" height="400">
+                                    <img src="../Fastfood.png" alt="" width="400">
                                 </div>
                             </div>
                             <div class="col-12 col-md-6 col-lg-6 d-flex align-items-center w-full">
@@ -80,16 +114,16 @@
                                     <div class="card-body">
                                         <h4>Input Menu</h4>
                                     </div>
-                                    <div class="card-body">
+                                    <form action="" method="post" enctype="multipart/form-data" class="card-body">
                                         <div class="form-group">
-                                            <label>Nama Menu</label>
-                                            <input type="text" class="form-control ">
+                                            <label for="name">Nama Menu</label>
+                                            <input id="name" name="name" type="text" class="form-control ">
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-control-label">Gambar</label>
+                                            <label for="attachment" class="form-control-label">Gambar</label>
                                             <div>
                                                 <div class="custom-file">
-                                                    <input type="file" name="site_favicon" class="custom-file-input" id="site-favicon">
+                                                    <input type="file" name="attachment" class="custom-file-input" id="attachment">
                                                     <label class="custom-file-label">Choose File</label>
                                                 </div>
                                                 <div class="form-text text-muted">The image must have a maximum size of 1MB</div>
@@ -97,23 +131,20 @@
                                         </div>
                                         <div class="form-group">
                                             <label>jQuery Selectric</label>
-                                            <select class="form-control selectric">
-                                                <option>Option 1</option>
-                                                <option>Option 2</option>
-                                                <option>Option 3</option>
-                                                <option>Option 4</option>
-                                                <option>Option 5</option>
-                                                <option>Option 6</option>
+                                            <select name="categories_id" class="form-control selectric">
+                                                <?php foreach ($categories as $categori): ?>
+                                                    <option value="<?= $categori["id"] ?>"><?= $categori["name"] ?></option>
+                                                <?php endforeach; ?>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>Harga</label>
-                                            <input type="number" class="form-control ">
+                                            <label for="price">Harga</label>
+                                            <input id="price" name="price" type="number" class="form-control ">
                                         </div>
                                         <div class="d-flex justify-content-end">
-                                            <button class="btn btn-primary ">Tambahkan</button>
+                                            <button name="submit" type="submit" class="btn btn-primary ">Tambahkan</button>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
